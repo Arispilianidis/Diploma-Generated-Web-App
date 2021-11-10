@@ -1,0 +1,35 @@
+[
+  {
+    "id": 1,
+    "name": "John",
+    "age": 12,
+    "assignedProcesses": ["Home"],
+    "dueDate": ["10-2-2021"]
+  },
+  {
+    "id": 2,
+    "name": "Aris",
+    "age": 15,
+    "assignedProcesses": [
+      ""
+    ],
+    "dueDate": [
+      ""
+    ]
+  },
+  {
+    "id": 3,
+    "name": "Kostas",
+    "age": 20,
+    "assignedProcesses": [
+      "sth1",
+      "sth2",
+      "sth3"
+    ],
+    "dueDate": [
+      "18-6-2021",
+      "19-6-2021",
+      "20-6-2021"
+    ]
+  }
+]
