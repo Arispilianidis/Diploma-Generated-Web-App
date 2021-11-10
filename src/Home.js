@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import * as Yup from 'yup'
 import { useNavigate } from 'react-router-dom';
 import { useLocation } from 'react-router';
-
+import axios from 'axios'
 import './css/Home.css';
 import JobDescTemp1 from './JobDescTemp/JobDescTemp1';
 import JobDescTemp2 from './JobDescTemp/JobDescTemp2';
@@ -35,6 +35,23 @@ function Home() {
     proofs:['',''], // TODO:8a dimiourgoume to proof analoga me to size, poy 8a to pernoyme apo ton sxediasti h businesNAMe_Proof isws klaitera
   })
 
+  function postProof(imagefileName) {
+
+    var uploadsPostURL = "http://localhost:3000/uploads"
+
+    var formData = new FormData();
+    var imagefile = document.getElementById(imagefileName)
+    console.log(imagefile)
+    formData.append("file", imagefile.files[0]);
+    axios.post(uploadsPostURL, formData, {
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Content-Type':'multipart/form-data',
+      }
+    })
+    .catch(error => console.log("Error at postProof => " + error.message))
+
+  }
 
   const validationSchema1 = Yup.object({
     businessName: Yup.string().required('Required'),
@@ -86,11 +103,10 @@ function Home() {
   }
 
 
-
   const pages = [
-    <JobDescTemp1 initialValues={initialValues} validationSchema={validationSchema1} onSubmit={onSubmit} />,
-    <JobDescTemp2 prevStep={prevStep} initialValues={initialValues} validationSchema={validationSchema2} onSubmit={onSubmit} />,
-    <JobDescTemp3 prevStep={prevStep} initialValues={initialValues} validationSchema={validationSchema3} onSubmit={onSubmit} />
+    <JobDescTemp1 initialValues={initialValues} validationSchema={validationSchema1} onSubmit={onSubmit} postProof={postProof} />,
+    <JobDescTemp2 prevStep={prevStep} initialValues={initialValues} validationSchema={validationSchema2} onSubmit={onSubmit} postProof={postProof} />,
+    <JobDescTemp3 prevStep={prevStep} initialValues={initialValues} validationSchema={validationSchema3} onSubmit={onSubmit} postProof={postProof} />
   ]
 
 

@@ -2,7 +2,7 @@ import React from 'react'
 import FormikControl from '../components/FormikControl'
 import { Formik, Form } from 'formik'
 import Proof from '../components/Proof'
-import axios from 'axios'
+
 
 
 
@@ -12,24 +12,6 @@ function JobDescTemp1(props) {
     props.onSubmit(values, false)
   }
 
-
-  function postProof(imagefileName) {
-
-    var uploadsPostURL = "http://localhost:3000/uploads"
-
-    var formData = new FormData();
-    var imagefile = document.getElementById(imagefileName)
-    console.log(imagefile)
-    formData.append("file", imagefile.files[0]);
-    axios.post(uploadsPostURL, formData, {
-      headers: {
-        'Access-Control-Allow-Origin': '*',
-        'Content-Type':'multipart/form-data',
-      }
-    })
-    .catch(error => console.log("Error at postProof => " + error.message))
-
-  }
 
   return (
 
@@ -49,7 +31,7 @@ function JobDescTemp1(props) {
             
             <input style={{ marginLeft: 30 }} name='proofs[0]' type='file' id='proofs[0]'  onChange={(event) => {
               formik.setFieldValue("proofs[0]",event.currentTarget.files[0])
-              postProof("proofs[0]")
+              props.postProof("proofs[0]")
             }} />
 
             <Proof file={formik.values.proofs[0]} />
