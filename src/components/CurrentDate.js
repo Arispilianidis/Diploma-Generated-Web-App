@@ -18,7 +18,7 @@ function CurrentDate() {
     }, [])
 
     return (
-        <div>
+        <div style={{marginBottom:25, color:"white"}}>
             {date}
         </div>
     )

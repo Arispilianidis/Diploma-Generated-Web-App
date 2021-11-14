@@ -4,8 +4,6 @@ import { Formik, Form } from 'formik'
 import Proof from '../components/Proof'
 
 
-
-
 function JobDescTemp1(props) {
 
   const handleSumbit = (values) => {
