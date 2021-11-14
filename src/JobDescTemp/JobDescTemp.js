@@ -3,13 +3,13 @@ import * as Yup from 'yup'
 import { useNavigate } from 'react-router-dom';
 import { useLocation } from 'react-router';
 import axios from 'axios'
-import './css/Home.css';
-import JobDescTemp1 from './JobDescTemp/JobDescTemp1';
-import JobDescTemp2 from './JobDescTemp/JobDescTemp2';
-import JobDescTemp3 from './JobDescTemp/JobDescTemp3';
+import '../css/JobDescTemp.css';
+import JobDescTemp1 from './JobDescTemp1';
+import JobDescTemp2 from './JobDescTemp2';
+import JobDescTemp3 from './JobDescTemp3';
 
 
-function Home() {
+function JobDescTemp() {
 
   let { state } = useLocation();
   let serverUserInfo = state[0]
@@ -124,4 +124,4 @@ function Home() {
 
 
 
-export default Home;
+export default JobDescTemp;

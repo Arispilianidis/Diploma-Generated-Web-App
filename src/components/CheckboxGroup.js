@@ -5,7 +5,7 @@ import TextError from './TextError'
 function CheckboxGroup(props) {
     const { label, name, options, ...rest } = props
 
-    function myFunction() {
+    function SearchBox() {
         // Declare variables
         var input, filter, ul, li, i, mylabels;
         var inputsWeActuallyWant = [];
@@ -47,7 +47,7 @@ function CheckboxGroup(props) {
             <label style={{ display: 'block', textAlign: 'center' }}>{label}</label>
             <div id={props.id} className="CheckboxContainer">
 
-                <input type="text" id={props.name} onKeyUp={myFunction} placeholder="Search.." />
+                <input type="text" id={props.name} onKeyUp={SearchBox} placeholder="Search.." />
 
                 <Field name={name} {...rest}>
                     {

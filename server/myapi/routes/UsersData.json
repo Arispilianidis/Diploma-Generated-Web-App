@@ -3,7 +3,7 @@
     "id": 1,
     "name": "John",
     "age": 12,
-    "assignedProcesses": ["Home"],
+    "assignedProcesses": ["JobDescTemp"],
     "dueDate": ["10-2-2021"]
   },
   {

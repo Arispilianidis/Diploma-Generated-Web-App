@@ -17,10 +17,21 @@ function Processes() {
 
     const columns = useMemo(() => COLUMNS, [])
     //TODO: bres ton me username kai password anti gia fname
-    var currentUserProcessTableData = useMemo(() => allUsers.find(user => user.name === loginUserInfo.fname), [allUsers, loginUserInfo])
-    console.log(currentUserProcessTableData)
-    const currentUserProcessTableDataArray = []
-    currentUserProcessTableDataArray.push(currentUserProcessTableData)
+    var serverUserInfo = useMemo(() => allUsers.find(user => user.name === loginUserInfo.fname), [allUsers, loginUserInfo])
+    console.log(serverUserInfo)
+
+   
+    //Transform the data to the correct format
+    let serverUserInfoObjectArray = []
+
+    for (let x in serverUserInfo.assignedProcesses) {
+        let serverUserInfoObject = {}
+        serverUserInfoObject.assignedProcesses = serverUserInfo.assignedProcesses[x]
+        serverUserInfoObject.dueDate = serverUserInfo.dueDate[x]
+        serverUserInfoObjectArray.push(serverUserInfoObject)
+    }
+    console.log(serverUserInfoObjectArray)
+
 
     const {
         getTableProps,
@@ -30,29 +41,28 @@ function Processes() {
         prepareRow,
     } = useTable({
         columns,
-        data: currentUserProcessTableDataArray
+        data: serverUserInfoObjectArray
     })
 
     function goto(event) {
 
         var processName = event.target.textContent
         //TODO:chekare ksana me basi ta dates pou perneis apo to Sirius
-        if (processName.includes("-"))
-        {
-            
+        if (processName.includes("-")) {
+
         }
-        else{
-            navigate("/" + processName, {state: [currentUserProcessTableData,processName,loginUserInfo]})
+        else {
+            navigate("/" + processName, { state: [serverUserInfo, processName, loginUserInfo] })
         }
 
     }
 
 
     return (
-    
-        
-         <div className="TableContainer">
-            <CurrentDate/>
+
+
+        <div className="TableContainer">
+            <CurrentDate />
             <table {...getTableProps()}>
                 <thead>
                     {headerGroups.map((headerGroup) => (
@@ -78,8 +88,8 @@ function Processes() {
                 </tbody>
             </table>
         </div>
-        
-   
+
+
     )
 }
 
