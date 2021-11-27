@@ -43,7 +43,7 @@ function CheckboxGroup(props) {
     }
 
     return (
-        <div style={{ display: 'block' }}>
+        <div>
             <label style={{ display: 'block', textAlign: 'center' }}>{label}</label>
             <div id={props.id} className="CheckboxContainer">
 
@@ -55,7 +55,7 @@ function CheckboxGroup(props) {
                             return options.map(option => {
                                 return (
                                     <React.Fragment key={option.key}>
-                                        <div style={{ justifyContent: 'flex-start' }}>
+                                        <div style={{ justifyContent: 'flex-start' }} className="flexBoxes">
                                             <input type='checkbox' id={option.value} {...field} value={option.value} checked={field.value.includes(option.value)} />
                                             <label style={{ fontSize: 13.5, marginTop: 7.5, fontStyle: 'italic' }} htmlFor={option.value}>{option.key}</label>
                                         </div>

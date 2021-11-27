@@ -2,13 +2,13 @@ import React, { useState, useEffect } from 'react'
 
 function CurrentDate() {
 
-    let [date, setDate] = useState(new Date().toUTCString());
+    let [date, setDate] = useState(new Date().toLocaleString('en-GB'));
 
 
     useEffect(() => {
 
         const intervalID = setInterval(() => {
-            setDate(new Date().toUTCString())
+            setDate(new Date().toLocaleString('en-GB'))
         }, 1000)
 
         return () => {
@@ -18,7 +18,7 @@ function CurrentDate() {
     }, [])
 
     return (
-        <div style={{marginBottom:25, color:"white"}}>
+        <div style={{marginBottom:25, color:"white" , display:'flex', alignItems:'center', marginLeft:-20}}>
             {date}
         </div>
     )

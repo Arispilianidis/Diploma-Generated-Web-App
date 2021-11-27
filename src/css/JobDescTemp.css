@@ -13,7 +13,7 @@ body {
   padding: 40px;
   width: 90%;
   min-width: 500px;
-  max-width: 500px;
+  max-width: 600px;
 }
 
 .img-proof{
@@ -42,18 +42,20 @@ p{
   text-align: justify;
   margin: 10px;
   font-family: system-ui;
-  padding: 5px 10px;
+  padding: 5px 1px;
 }
 
 textarea{
-
   padding: 12px 20px;
-  margin-left: 20px;
-  box-sizing: border-box;
   border: 2px solid #ccc;
   border-radius: 4px;
   background-color: #f8f8f8;
-  resize: none;
+  resize: vertical;
+  max-block-size: 200px;
+  min-block-size: 100px;
+  width: 90%;
+  margin-left: 4%;
+  margin-right: 5%;
 
 }
 
@@ -65,10 +67,11 @@ textarea{
   width: 380px;
   height: 200px;
   position:static;
+  min-width: 94%;
+
 }
 
-/*this creates a circle checkbox with another smaller circle
-inside when checked, it looks nice ...*/
+
 input[type='checkbox'] {
   display:flex;
   margin-right:5px;

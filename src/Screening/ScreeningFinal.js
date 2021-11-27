@@ -3,10 +3,11 @@ import { useLocation } from 'react-router';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
-
 const workersURL = "http://localhost:3000/users"
 
-function JobDescTempFinal() {
+
+function ScreeningFinal() {
+
 
     const navigate = useNavigate();
     let { state } = useLocation();
@@ -24,8 +25,9 @@ function JobDescTempFinal() {
         return date && Object.prototype.toString.call(date) === "[object Date]" && !isNaN(date);
     }
 
-
     function printItem(Item) {
+
+        console.log(typeof (Item))
 
         if (typeof (Item) === 'object') {
 
@@ -45,7 +47,9 @@ function JobDescTempFinal() {
 
     }
 
+    console.log(formData)
 
+   
     //Update user's info since he completed the process
     function completeTask() {
 
@@ -56,7 +60,6 @@ function JobDescTempFinal() {
         serverUserInfo.dueDate.splice(processIndex, 1)
         // console.log(serverUserInfo)
 
-        //TODO: send formData in a JSON format to server so we can reload it for Screening process
         axios.post("http://localhost:3000/" + processName, formData, {
             headers: {
                 'Access-Control-Allow-Origin': '*',
@@ -82,28 +85,26 @@ function JobDescTempFinal() {
 
     }
 
-
-
     return (
         <div style={{ width: "50%", margin: "auto", maxWidth: 650, minWidth: 500 }}>
-            <h1>Job Description Overview</h1><br />
+            <h1>Screening Overview</h1><br />
             <hr></hr><br />
 
             <div style={{ backgroundColor: 'white' }}>
-                <h4> businessName: &emsp;&emsp;&emsp;&emsp;</h4> {printItem(formData.businessName)}  <br />
+                <h4> candidateName: &emsp;&emsp;&emsp;&emsp;</h4> {printItem(formData.candidateName)}  <br />
 
-                <h4> title: &emsp;&emsp;&emsp;&emsp;</h4> {printItem(formData.title)} <br />
+                <h4> candidateEmail: &emsp;&emsp;&emsp;&emsp;</h4> {printItem(formData.candidateEmail)} <br />
 
-                <h4> responsibilities:  &emsp;&emsp;&emsp;&emsp;</h4> {printItem(formData.responsibilities)}<br />
-
-                <h4>progLangResponsibilities:&emsp;&emsp;&emsp;&emsp;</h4> {printItem(formData.progLangResponsibilities)}<br />
+                <h4>dateApplied:&emsp;&emsp;&emsp;&emsp;</h4> {printItem(formData.dateApplied)}<br />
+                {/* TODO: in case of array fix this */}
+                <h4> progrLangAnswer:&emsp;&emsp;&emsp;&emsp;</h4>{printItem(formData.progrLangAnswer[0])}<br />
             </div>
 
-            <button className="btn_complete" onClick={completeTask}>Complete Task</button>
-
-
+            {/* <button className="btn_complete" onClick={completeTask}>Complete Task</button> */}
         </div>
+
     )
 }
 
-export default JobDescTempFinal
+export default ScreeningFinal
+

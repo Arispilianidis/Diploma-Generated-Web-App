@@ -19,25 +19,25 @@ function JobDescTemp() {
   const navigate = useNavigate();
   const [step, setStep] = useState(0);
   const [initialValues, setInitialValues] = useState({
-    businessName: '',
-    title: '',
-    location: '',
-    description: '',
+    businessName: "",
+    title: "",
+    location: "",
+    description: "",
     responsibilities: [],
     progLangResponsibilities: [],
     qualifications: [],
-    jobLengthRadioOption: '',
+    jobLengthRadioOption: "",
     skillsAquired: [],
     postDate: null,
     closePostDate: null,
     salary: 0,
     checkboxOption: [],
-    proofs:['',''], // TODO:8a dimiourgoume to proof analoga me to size, poy 8a to pernoyme apo ton sxediasti h businesNAMe_Proof isws klaitera
+    proofs:['',''], // TODO: businesNAMe_Proof isws klaitera
   })
 
   function postProof(imagefileName) {
 
-    var uploadsPostURL = "http://localhost:3000/uploads"
+    var uploadsPostURL = "http://localhost:3000/proofs"
 
     var formData = new FormData();
     var imagefile = document.getElementById(imagefileName)
@@ -65,17 +65,16 @@ function JobDescTemp() {
 
   const validationSchema3 = Yup.object({
     title: Yup.string().required('Required'),
-    responsibilities: Yup.array().min(1, 'Required'),
-    progLangResponsibilities: Yup.array().min(1, 'Required'),
+    responsibilities: Yup.array().required('Required').min(1, 'Required'),
+    progLangResponsibilities: Yup.array().required('Required').min(1, 'Required'),
   })
 
 
-  //not really neaded
+ 
   const onSubmit = (formValues, final) => {
 
     console.log('Form data', formValues)
-    // console.log('Final', final)
-
+   
     nextStep(formValues, final)
 
   }
@@ -87,7 +86,7 @@ function JobDescTemp() {
 
     if (final) {
       console.log("Form submitted", newData)
-      navigate("/JobDescTempFinal", {state: [newData,serverUserInfo,processName,loginUserInfo]});
+      navigate("/FinalComponent", {state: [newData,serverUserInfo,processName,loginUserInfo]});
     }
     else{
       setStep(step => step + 1)

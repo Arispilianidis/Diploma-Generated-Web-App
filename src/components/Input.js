@@ -8,7 +8,7 @@ function Input(props) {
 
     return (
 
-      <div style={{ display: 'block' }}>
+      <div style={{ display: 'inline' }}>
 
         <label htmlFor={name}><b>{label}</b></label>
         <Field id={name} name={name} {...rest} />

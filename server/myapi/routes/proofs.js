@@ -15,7 +15,7 @@ router.post('/', function (req, res, next) {
 
         var file = req.files.file
 
-        file.mv('./public/images/uploads/' + file.name, function (err) {
+        file.mv('./public/images/proofs/' + file.name, function (err) {
             if (err) {
                 res.send(err)
             }

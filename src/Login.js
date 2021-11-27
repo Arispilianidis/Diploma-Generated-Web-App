@@ -16,26 +16,21 @@ function Login() {
     const [post, setPost] = useState(null);
 
     const initialValues = {
-        fname: '',
-        lname: '',
-        email: ''
+        username: '',
+        password: '',
     }
 
     const validationSchema = Yup.object({
-        fname: Yup.string().required('Required'),
-        lname: Yup.string().required('Required'),
-        email: Yup.string().required('Required'),
-
+        username: Yup.string().required('Required'),
+        password: Yup.string().required('Required'),
     })
 
     const onSubmit = loginValues => {
 
         console.log('Form data', loginValues)
-        // console.log('Post data', post.data)
-
 
         if (authorize(loginValues, post.data)) {
-            alert("Welcome " + loginValues.fname + " " + loginValues.lname)
+            alert("Welcome " + loginValues.username)
             setTimeout(function () {
                 navigate("/Processes", {state: [loginValues,post.data]});
             }, 500);
@@ -57,14 +52,10 @@ function Login() {
         //test
         function myFunction(person) {
 
-
-            //TODO: search by username and password
-
-            if ((person.name.toLowerCase() === loginValues.fname.toLowerCase())) {
+            if ((person.username.toLowerCase() === loginValues.username.toLowerCase()) && (person.password.toLowerCase() === loginValues.password.toLowerCase())) {
                 result = true
                 return result
             }
-
         }
     }
 
@@ -99,7 +90,7 @@ function Login() {
     // }
     
     return (
-        <div>
+        <div className="flexBoxes">
 
             <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
                 {
@@ -107,9 +98,8 @@ function Login() {
                         <div className="imgcontainer">
                             <img src="https://www.w3schools.com/howto/img_avatar2.png" alt="Avatar" />
                         </div>
-                        <FormikControl control='input' type='text' label='First Name' name='fname' placeholder="Enter First Name" />
-                        <FormikControl control='input' type='text' label='Last Name' name='lname' placeholder="Enter Last Name" />
-                        <FormikControl control='input' type='email' label='Email' name='email' placeholder="Enter Email" />
+                        <FormikControl control='input' type='text' label='Username' name='username' placeholder="Enter Username" />
+                        <FormikControl control='input' type='text' label='Password' name='password' placeholder="Enter Password" />
                         <button type='submit' disabled={!formik.isValid}> Submit</button>
                     </Form>
                 }

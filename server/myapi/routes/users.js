@@ -35,7 +35,7 @@ router.put('/', function (req, res, next) {
   dataArray[objIndex].dueDate = newData.dueDate
 
   //Async write to UsersData.json the new datarray
-  //TODO: The correct path to replace the file is ./routes/UsersData.json
+  //TODO: The correct path to replace the file is ./routes/UsersData.json, the one now is for dev only
   writeFile('./UsersData.json', JSON.stringify(dataArray, null, 2), function writeJSON(err) {
     if (err) return console.log(err);
     // console.log(JSON.stringify(dataArray));

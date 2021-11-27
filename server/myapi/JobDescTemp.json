@@ -1,0 +1,23 @@
+{
+  "businessName": "a",
+  "title": "a",
+  "location": "a",
+  "description": "a",
+  "responsibilities": [
+    "Employee orientation and training logistics and recordkeeping"
+  ],
+  "progLangResponsibilities": [
+    "CSS"
+  ],
+  "qualifications": [],
+  "jobLengthRadioOption": "",
+  "skillsAquired": [],
+  "postDate": null,
+  "closePostDate": null,
+  "salary": 123,
+  "checkboxOption": [],
+  "proofs": [
+    "",
+    ""
+  ]
+}

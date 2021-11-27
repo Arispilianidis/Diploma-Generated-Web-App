@@ -16,18 +16,17 @@ function Processes() {
     console.log(allUsers)
 
     const columns = useMemo(() => COLUMNS, [])
-    //TODO: bres ton me username kai password anti gia fname
-    var serverUserInfo = useMemo(() => allUsers.find(user => user.name === loginUserInfo.fname), [allUsers, loginUserInfo])
+    var serverUserInfo = useMemo(() => allUsers.find(user => (user.username === loginUserInfo.username && user.password === loginUserInfo.password)), [allUsers,loginUserInfo])
     console.log(serverUserInfo)
 
-   
+
     //Transform the data to the correct format
     let serverUserInfoObjectArray = []
 
     for (let x in serverUserInfo.assignedProcesses) {
         let serverUserInfoObject = {}
         serverUserInfoObject.assignedProcesses = serverUserInfo.assignedProcesses[x]
-        serverUserInfoObject.dueDate = serverUserInfo.dueDate[x]
+        serverUserInfoObject.dueDate = new Date((serverUserInfo.dueDate[x]).split('EET')).toLocaleString()
         serverUserInfoObjectArray.push(serverUserInfoObject)
     }
     console.log(serverUserInfoObjectArray)
@@ -47,14 +46,13 @@ function Processes() {
     function goto(event) {
 
         var processName = event.target.textContent
-        //TODO:chekare ksana me basi ta dates pou perneis apo to Sirius
-        if (processName.includes("-")) {
 
+        if (processName.includes(":") || processName.includes("/")) {
+            //the user clicked the dueDate and not the process
         }
         else {
             navigate("/" + processName, { state: [serverUserInfo, processName, loginUserInfo] })
         }
-
     }
 
 
