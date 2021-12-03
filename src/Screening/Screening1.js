@@ -3,29 +3,11 @@ import FormikControl from '../components/FormikControl'
 import { Formik, Form } from 'formik'
 import axios from 'axios'
 
+
 function Screening1(props) {
 
     const handleSumbit = (values) => {
         props.onSubmit(values, false)
-    }
-
-
-    function postResume(fileName) {
-
-        var ResumePostURL = "http://localhost:3000/resume"
-
-        var formData = new FormData();
-        var imagefile = document.getElementById(fileName)
-        console.log(imagefile)
-        formData.append("file", imagefile.files[0]);
-        console.log(formData)
-        axios.post(ResumePostURL, formData, {
-            headers: {
-                'Access-Control-Allow-Origin': '*',
-                'Content-Type': 'multipart/form-data',
-            }
-        })
-            .catch(error => console.log("Error at postResume => " + error.message))
     }
 
     return (
@@ -34,7 +16,7 @@ function Screening1(props) {
             {
 
                 formik => <Form id="regForm">
-                    <h1> Screening </h1>
+                    <h1> Screening Overview </h1>
                     <span>
 
                         <h3> Look for the minimum requirements</h3>
@@ -48,9 +30,9 @@ function Screening1(props) {
 
 
                         <label htmlFor="candidateResume" style={{marginLeft:10}}><b>Candidate Resume</b></label>
-                        <input style={{ marginLeft: 20 }} name='candidateResume' type='file' id='candidateResume' onChange={(event) => {
+                        <input style={{ marginLeft: 20 }} name='candidateResume' type='file' id='candidateResume'  onChange={(event) => {
                             formik.setFieldValue("candidateResume", event.currentTarget.files[0])
-                            postResume("candidateResume")
+                            props.postProof("candidateResume")
                         }} />
 
                         <button type="submit"> Next</button>

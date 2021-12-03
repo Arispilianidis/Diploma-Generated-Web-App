@@ -32,12 +32,12 @@ function JobDescTemp() {
     closePostDate: null,
     salary: 0,
     checkboxOption: [],
-    proofs:['',''], // TODO: businesNAMe_Proof isws klaitera
+    businessNameProof: "",
   })
 
   function postProof(imagefileName) {
 
-    var uploadsPostURL = "http://localhost:3000/proofs"
+    var uploadsPostURL = "http://localhost:3000/uploadeFiles"
 
     var formData = new FormData();
     var imagefile = document.getElementById(imagefileName)
@@ -86,7 +86,7 @@ function JobDescTemp() {
 
     if (final) {
       console.log("Form submitted", newData)
-      navigate("/FinalComponent", {state: [newData,serverUserInfo,processName,loginUserInfo]});
+      navigate("/" + processName +"Final", {state: [newData,serverUserInfo,processName,loginUserInfo]});
     }
     else{
       setStep(step => step + 1)

@@ -49,6 +49,7 @@ function Processes() {
 
         if (processName.includes(":") || processName.includes("/")) {
             //the user clicked the dueDate and not the process
+            alert("Please click the Processe's name instead of the date")
         }
         else {
             navigate("/" + processName, { state: [serverUserInfo, processName, loginUserInfo] })

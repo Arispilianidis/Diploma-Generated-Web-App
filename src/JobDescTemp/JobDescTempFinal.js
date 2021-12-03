@@ -40,7 +40,7 @@ function JobDescTempFinal() {
             }
         }
         else {
-            return Item
+            return <p key={Item} style={{ textAlign: 'left' }}> {Item}</p>
         }
 
     }
@@ -56,7 +56,6 @@ function JobDescTempFinal() {
         serverUserInfo.dueDate.splice(processIndex, 1)
         // console.log(serverUserInfo)
 
-        //TODO: send formData in a JSON format to server so we can reload it for Screening process
         axios.post("http://localhost:3000/" + processName, formData, {
             headers: {
                 'Access-Control-Allow-Origin': '*',
@@ -64,7 +63,7 @@ function JobDescTempFinal() {
             }
         })
             .then(response => console.log(response))
-            .catch(error => console.log("Error at postProof => " + error.message))
+            .catch(error => console.log("Error at complete Task => " + error.message))
 
 
         axios.put(workersURL, {
@@ -89,14 +88,14 @@ function JobDescTempFinal() {
             <h1>Job Description Overview</h1><br />
             <hr></hr><br />
 
-            <div style={{ backgroundColor: 'white' }}>
-                <h4> businessName: &emsp;&emsp;&emsp;&emsp;</h4> {printItem(formData.businessName)}  <br />
+            <div style={{ backgroundColor: 'white', wordWrap: 'break-word' }}>
+                <h4> businessName: &emsp;&emsp;&emsp;&emsp;</h4> <div>{printItem(formData.businessName)}</div>  <br />
 
-                <h4> title: &emsp;&emsp;&emsp;&emsp;</h4> {printItem(formData.title)} <br />
+                <h4> title: &emsp;&emsp;&emsp;&emsp;</h4> <div>{printItem(formData.title)} </div><br />
 
-                <h4> responsibilities:  &emsp;&emsp;&emsp;&emsp;</h4> {printItem(formData.responsibilities)}<br />
+                <h4> responsibilities:  &emsp;&emsp;&emsp;&emsp;</h4><div> {printItem(formData.responsibilities)}</div><br />
 
-                <h4>progLangResponsibilities:&emsp;&emsp;&emsp;&emsp;</h4> {printItem(formData.progLangResponsibilities)}<br />
+                <h4>progLangResponsibilities:&emsp;&emsp;&emsp;&emsp;</h4><div> {printItem(formData.progLangResponsibilities)}</div><br />
             </div>
 
             <button className="btn_complete" onClick={completeTask}>Complete Task</button>

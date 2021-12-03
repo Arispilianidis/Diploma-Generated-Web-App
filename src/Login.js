@@ -40,6 +40,7 @@ function Login() {
         }
     }
 
+    
     function authorize(loginValues, data) {
 
         var result = false
@@ -59,6 +60,7 @@ function Login() {
         }
     }
 
+    //TODO: Do the authentication on server with POST
     useEffect(() => {
         axios.get(workersURL, {
             method: 'GET',
@@ -71,23 +73,6 @@ function Login() {
             .catch(error => console.log("Error at get users " + error.message))
     }, [])
 
-
-    //Post method for later usage
-    // function createPost() {
-    //     axios
-    //         .post(workersURL, {
-    //             name: "arisre",
-    //             age: 100
-    //         }, {
-    //             headers: {
-    //                 'Access-Control-Allow-Origin': '*',
-    //                 'Content-Type': 'application/json',
-    //             }
-    //         })
-    //         .then((response) => {
-    //             window.location.reload(true);
-    //         }).catch(error => console.log("Error at post users => " + error.message))
-    // }
     
     return (
         <div className="flexBoxes">

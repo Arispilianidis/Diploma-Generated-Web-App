@@ -47,8 +47,6 @@ function ScreeningFinal() {
 
     }
 
-    console.log(formData)
-
    
     //Update user's info since he completed the process
     function completeTask() {
@@ -59,16 +57,6 @@ function ScreeningFinal() {
         serverUserInfo.assignedProcesses.splice(processIndex, 1)
         serverUserInfo.dueDate.splice(processIndex, 1)
         // console.log(serverUserInfo)
-
-        axios.post("http://localhost:3000/" + processName, formData, {
-            headers: {
-                'Access-Control-Allow-Origin': '*',
-                'Content-Type': 'application/json',
-            }
-        })
-            .then(response => console.log(response))
-            .catch(error => console.log("Error at postProof => " + error.message))
-
 
         axios.put(workersURL, {
             headers: {
@@ -85,22 +73,28 @@ function ScreeningFinal() {
 
     }
 
+    const PRogrammingLangQuestions = ['How much experience with', 'How many projects with']
+    const SpokenLangQuestions = ['How fluent in']
+
     return (
         <div style={{ width: "50%", margin: "auto", maxWidth: 650, minWidth: 500 }}>
             <h1>Screening Overview</h1><br />
             <hr></hr><br />
 
-            <div style={{ backgroundColor: 'white' }}>
-                <h4> candidateName: &emsp;&emsp;&emsp;&emsp;</h4> {printItem(formData.candidateName)}  <br />
+            <div style={{ backgroundColor: 'white', wordWrap: 'break-word'}}>
+                <h4> candidateName: &emsp;&emsp;&emsp;&emsp;</h4><div> {printItem(formData.candidateName)}</div>  <br />
 
-                <h4> candidateEmail: &emsp;&emsp;&emsp;&emsp;</h4> {printItem(formData.candidateEmail)} <br />
+                <h4> candidateEmail: &emsp;&emsp;&emsp;&emsp;</h4> <div>{printItem(formData.candidateEmail)} </div><br />
 
-                <h4>dateApplied:&emsp;&emsp;&emsp;&emsp;</h4> {printItem(formData.dateApplied)}<br />
-                {/* TODO: in case of array fix this */}
-                <h4> progrLangAnswer:&emsp;&emsp;&emsp;&emsp;</h4>{printItem(formData.progrLangAnswer[0])}<br />
+                <h4>dateApplied:&emsp;&emsp;&emsp;&emsp;</h4> <div>{printItem(formData.dateApplied)}</div><br />
+                {/* TODO: in case of array fix this in M2T*/}
+                <h4> {PRogrammingLangQuestions[0] + " HTML"}:&emsp;&emsp;&emsp;&emsp;</h4><div>{printItem(formData.progrLangAnswer[0])}</div><br />
+                <h4> {PRogrammingLangQuestions[1] + " HTML"}:&emsp;&emsp;&emsp;&emsp;</h4><div>{printItem(formData.progrLangAnswer[1])}</div><br />
+                <h4> {PRogrammingLangQuestions[0] + " CSS"}:&emsp;&emsp;&emsp;&emsp;</h4><div>{printItem(formData.progrLangAnswer[2])}</div><br />
+                <h4> {PRogrammingLangQuestions[1] + " CSS"}:&emsp;&emsp;&emsp;&emsp;</h4><div>{printItem(formData.progrLangAnswer[3])}</div><br />
             </div>
 
-            {/* <button className="btn_complete" onClick={completeTask}>Complete Task</button> */}
+            <button className="btn_complete" onClick={completeTask}>Complete Task</button>
         </div>
 
     )

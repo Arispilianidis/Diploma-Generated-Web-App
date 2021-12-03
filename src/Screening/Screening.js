@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useLocation } from 'react-router';
 import * as Yup from 'yup'
-
+import axios from 'axios'
 import Screening1 from './Screening1';
 import Screening2 from './Screening2';
 
@@ -19,20 +19,37 @@ function Screening() {
     candidateName: "",
     candidateEmail: " ",
     candidateResume: " ", //Since this is a custom variable i can choose whether or not to show it in the overview
-    dateApplied: "",
-    progrLangAnswer: ['', ''],
+    dateApplied: null,
+    progrLangAnswer: ['', '','',''],
   })
+
+  function postProof(imagefileName) {
+
+    var uploadsPostURL = "http://localhost:3000/uploadeFiles"
+
+    var formData = new FormData();
+    var imagefile = document.getElementById(imagefileName)
+    console.log(imagefile)
+    formData.append("file", imagefile.files[0]);
+    axios.post(uploadsPostURL, formData, {
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Content-Type':'multipart/form-data',
+      }
+    })
+    .catch(error => console.log("Error at postProof => " + error.message))
+
+  }
 
   const validationSchema1 = Yup.object({
     candidateName: Yup.string().required('Required'),
-    //TODO: fix if its email on M2T
     candidateEmail: Yup.string().email('Invalid email').required('Required'),
     candidateResume: Yup.string().required('Required'),
-    dateApplied: Yup.string().required('Required').nullable()
+    dateApplied: Yup.date().required('Required').nullable()
   })
 
-  const validationSchema2 = Yup.object({
-    progrLangAnswer: Yup.array().required('Required').min(1, 'Required'),
+  const validationSchema2 = Yup.object().shape({
+    progrLangAnswer: Yup.array().of(Yup.string().required('Required'))
   })
 
   const onSubmit = (formValues, final) => {
@@ -52,7 +69,9 @@ function Screening() {
 
     if (final) {
       console.log("Form submitted", newData)
-      navigate("/FinalComponent", { state: [newData,] });
+      //TODO: fix this
+      var processName = "Screening"
+      navigate("/" + processName +"Final", { state: [newData,serverUserInfo,processName,loginUserInfo] });
     }
     else {
       setStep(step => step + 1)
@@ -69,8 +88,8 @@ function Screening() {
 
 
   const pages = [
-    <Screening1 initialValues={initialValues} validationSchema={validationSchema1} onSubmit={onSubmit} />,
-    <Screening2 prevStep={prevStep} initialValues={initialValues} validationSchema={validationSchema2} onSubmit={onSubmit} />,
+    <Screening1 initialValues={initialValues} validationSchema={validationSchema1} onSubmit={onSubmit} postProof={postProof} />,
+    <Screening2 prevStep={prevStep} initialValues={initialValues} validationSchema={validationSchema2} onSubmit={onSubmit} postProof={postProof} />,
   ]
 
   return (
