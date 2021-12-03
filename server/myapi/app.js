@@ -11,7 +11,6 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var uploadsRouter = require('./routes/proofs');
 var JobDescTempRouter = require('./routes/JobDescTemp');
-var resumeRouter = require('./routes/resume');
 
 
 var app = express();
@@ -33,7 +32,6 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/proofs', uploadsRouter);
 app.use('/JobDescTemp', JobDescTempRouter);
-app.use('/resume', resumeRouter);
 
 
 // catch 404 and forward to error handler
