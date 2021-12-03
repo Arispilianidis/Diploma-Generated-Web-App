@@ -18,8 +18,8 @@ function CurrentDate() {
     }, [])
 
     return (
-        <div style={{marginBottom:25, color:"white" , display:'flex', alignItems:'center', marginLeft:-20}}>
-            {date}
+        <div style={{marginBottom:25, color:"white" , display:'flex', alignItems:'center', marginLeft:40}}>
+            {"Today: " + date}
         </div>
     )
 }

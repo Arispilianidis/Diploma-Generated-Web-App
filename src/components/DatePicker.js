@@ -3,7 +3,7 @@ import DateView from 'react-datepicker'
 import { Field, ErrorMessage } from 'formik'
 import TextError from './TextError'
 import "react-datepicker/dist/react-datepicker.css";
-import "./Datepicker.css"
+import "../css/Datepicker.css"
 
 
 function DatePicker(props) {

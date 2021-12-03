@@ -1,6 +1,6 @@
 export const COLUMNS = [
     {
-        Header: "Process",
+        Header: "Process Name",
         accessor: 'assignedProcesses'
     },
     {

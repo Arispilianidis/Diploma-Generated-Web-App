@@ -9,7 +9,7 @@ var cors = require('cors')
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-var uploadsRouter = require('./routes/proofs');
+var uploadsRouter = require('./routes/uploadeFiles');
 var JobDescTempRouter = require('./routes/JobDescTemp');
 
 
@@ -30,7 +30,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/proofs', uploadsRouter);
+app.use('/uploadeFiles', uploadsRouter);
 app.use('/JobDescTemp', JobDescTempRouter);
 
 
