@@ -61,6 +61,19 @@ h4{
     font-size: 18.5px;
 }
 
+.btn_reject {
+   
+    background-color: #ce3f52;
+    border-color: #ce3f52;
+    color: #fff;
+    width: 150px;
+    height: 50px;
+    float: right;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 18.5px;
+}
+
 label{
     text-align: left;
     font-family: "Helvetica";

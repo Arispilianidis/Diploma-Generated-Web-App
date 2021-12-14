@@ -13,12 +13,10 @@ function JobDescTempFinal() {
     const formData = state[0]
     const serverUserInfo = state[1]
     const processName = state[2]
-    const loginUserInfo = state[3]
 
     console.log(formData)
     console.log(serverUserInfo)
     console.log(processName)
-    console.log(loginUserInfo)
 
     function isValidDate(date) {
         return date && Object.prototype.toString.call(date) === "[object Date]" && !isNaN(date);
@@ -54,7 +52,6 @@ function JobDescTempFinal() {
         //remove process from the server
         serverUserInfo.assignedProcesses.splice(processIndex, 1)
         serverUserInfo.dueDate.splice(processIndex, 1)
-        // console.log(serverUserInfo)
 
         axios.post("http://localhost:3000/" + processName, formData, {
             headers: {
@@ -74,8 +71,8 @@ function JobDescTempFinal() {
             data: serverUserInfo
         })
             .then(response => {
-                // console.log(response.data)
-                navigate("/Processes", { state: [loginUserInfo, response.data.data] })
+                // console.log(response.data.data)
+                navigate("/Processes", { state: [response.data.data] })
             })
             .catch(error => console.log("Error at completeTask " + error.message))
 
@@ -89,13 +86,14 @@ function JobDescTempFinal() {
             <hr></hr><br />
 
             <div style={{ backgroundColor: 'white', wordWrap: 'break-word' }}>
-                <h4> businessName: &emsp;&emsp;&emsp;&emsp;</h4> <div>{printItem(formData.businessName)}</div>  <br />
+                <h4> businessName:</h4> <div>{printItem(formData.businessName)}</div>  <br />
 
-                <h4> title: &emsp;&emsp;&emsp;&emsp;</h4> <div>{printItem(formData.title)} </div><br />
+                <h4> title: </h4> <div>{printItem(formData.title)} </div><br />
 
-                <h4> responsibilities:  &emsp;&emsp;&emsp;&emsp;</h4><div> {printItem(formData.responsibilities)}</div><br />
+                <h4> responsibilities: </h4><div> {printItem(formData.responsibilities)}</div><br />
 
-                <h4>progLangResponsibilities:&emsp;&emsp;&emsp;&emsp;</h4><div> {printItem(formData.progLangResponsibilities)}</div><br />
+                <h4>progLangResponsibilities:</h4><div> {printItem(formData.progLangResponsibilities)}</div><br />
+                
             </div>
 
             <button className="btn_complete" onClick={completeTask}>Complete Task</button>

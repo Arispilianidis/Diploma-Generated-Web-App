@@ -14,7 +14,6 @@ function JobDescTemp() {
   let { state } = useLocation();
   let serverUserInfo = state[0]
   let processName = state[1]
-  let loginUserInfo = state[2]
 
   const navigate = useNavigate();
   const [step, setStep] = useState(0);
@@ -49,7 +48,7 @@ function JobDescTemp() {
         'Content-Type':'multipart/form-data',
       }
     })
-    .catch(error => console.log("Error at postProof => " + error.message))
+      .catch(error => console.log("Error at postProof => " + error.message))
 
   }
 
@@ -70,25 +69,16 @@ function JobDescTemp() {
   })
 
 
- 
+  // Proceed to next step
   const onSubmit = (formValues, final) => {
 
-    console.log('Form data', formValues)
-   
-    nextStep(formValues, final)
-
-  }
-
-  // Proceed to next step
-  function nextStep(newData, final = false) {
-
-    setInitialValues((prev) => ({ ...prev, ...newData }))
+    setInitialValues((prev) => ({ ...prev, ...formValues }))
 
     if (final) {
-      console.log("Form submitted", newData)
-      navigate("/" + processName +"Final", {state: [newData,serverUserInfo,processName,loginUserInfo]});
+      console.log("Form submitted", formValues)
+      navigate("/" + processName + "Final", { state: [formValues, serverUserInfo, processName] });
     }
-    else{
+    else {
       setStep(step => step + 1)
     }
 
@@ -112,7 +102,7 @@ function JobDescTemp() {
   return (
 
     <div>
-      { pages[step] }
+      {pages[step]}
 
     </div>
 

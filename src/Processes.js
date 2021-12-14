@@ -10,15 +10,11 @@ import './css/Tables.css'
 function Processes() {
 
     const { state } = useLocation();
-    const loginUserInfo = state[0]
-    const allUsers = state[1]
-    const navigate = useNavigate();
-    console.log(allUsers)
-
-    const columns = useMemo(() => COLUMNS, [])
-    var serverUserInfo = useMemo(() => allUsers.find(user => (user.username === loginUserInfo.username && user.password === loginUserInfo.password)), [allUsers,loginUserInfo])
+    const serverUserInfo = state[0]
     console.log(serverUserInfo)
-
+    
+    const navigate = useNavigate();
+    const columns = useMemo(() => COLUMNS, [])
 
     //Transform the data to the correct format
     let serverUserInfoObjectArray = []
@@ -29,8 +25,6 @@ function Processes() {
         serverUserInfoObject.dueDate = new Date((serverUserInfo.dueDate[x]).split('EET')).toLocaleString()
         serverUserInfoObjectArray.push(serverUserInfoObject)
     }
-    console.log(serverUserInfoObjectArray)
-
 
     const {
         getTableProps,
@@ -49,13 +43,12 @@ function Processes() {
 
         if (processName.includes(":") || processName.includes("/")) {
             //the user clicked the dueDate and not the process
-            alert("Please click the Processe's name instead of the date")
+            alert("Please click the Process's name instead of the date")
         }
         else {
-            navigate("/" + processName, { state: [serverUserInfo, processName, loginUserInfo] })
+            navigate("/" + processName, { state: [serverUserInfo, processName] })
         }
     }
-
 
     return (
 

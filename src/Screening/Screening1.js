@@ -1,10 +1,12 @@
 import React from 'react'
 import FormikControl from '../components/FormikControl'
 import { Formik, Form } from 'formik'
-import axios from 'axios'
+import { Rating } from 'react-simple-star-rating'
 
 
 function Screening1(props) {
+
+    console.log(props.initialValues)
 
     const handleSumbit = (values) => {
         props.onSubmit(values, false)
@@ -25,12 +27,19 @@ function Screening1(props) {
                             Record the details of the candidate and application in general using the form fields below.</p>
 
                         <FormikControl control='input' type='text' label='Candidate Name ' name='candidateName' placeholder="Name" />
+                        <Rating
+                            onClick={(rate) => { props.handleRating(rate, 'candidateNameRating'); }}
+                            size={30}
+                        />
                         <FormikControl control='input' type='text' label='Candidate Email ' name='candidateEmail' />
+                        <Rating
+                            onClick={(rate) => { props.handleRating(rate, 'candidateEmailRating'); }}
+                            size={30}
+                        />
                         <FormikControl control='date' label='Candidate Date Applied' name='dateApplied' />
 
-
-                        <label htmlFor="candidateResume" style={{marginLeft:10}}><b>Candidate Resume</b></label>
-                        <input style={{ marginLeft: 20 }} name='candidateResume' type='file' id='candidateResume'  onChange={(event) => {
+                        <label htmlFor="candidateResume" style={{ marginLeft: 10 }}><b>Candidate Resume</b></label>
+                        <input style={{ marginLeft: 20 }} name='candidateResume' type='file' id='candidateResume' onChange={(event) => {
                             formik.setFieldValue("candidateResume", event.currentTarget.files[0])
                             props.postProof("candidateResume")
                         }} />

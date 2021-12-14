@@ -6,21 +6,30 @@ import axios from 'axios'
 import Screening1 from './Screening1';
 import Screening2 from './Screening2';
 
+const ratingsMap = new Map([
+  ["candidateNameRating", 0],
+  ["candidateEmailRating", 0],
+]);
+
 function Screening() {
 
   let { state } = useLocation();
   let serverUserInfo = state[0]
   let processName = state[1]
-  let loginUserInfo = state[2]
+
+  // Catch Rating value
+  const handleRating = (rate, name) => {
+    ratingsMap.set(name, rate)
+  }
 
   const navigate = useNavigate();
   const [step, setStep] = useState(0);
   const [initialValues, setInitialValues] = useState({
     candidateName: "",
     candidateEmail: " ",
-    candidateResume: " ", //Since this is a custom variable i can choose whether or not to show it in the overview
+    candidateResume: " ",
     dateApplied: null,
-    progrLangAnswer: ['', '','',''],
+    progrLangAnswer: ["","","","","",""],
   })
 
   function postProof(imagefileName) {
@@ -37,8 +46,7 @@ function Screening() {
         'Content-Type':'multipart/form-data',
       }
     })
-    .catch(error => console.log("Error at postProof => " + error.message))
-
+      .catch(error => console.log("Error at postProof => " + error.message))
   }
 
   const validationSchema1 = Yup.object({
@@ -48,30 +56,19 @@ function Screening() {
     dateApplied: Yup.date().required('Required').nullable()
   })
 
-  const validationSchema2 = Yup.object().shape({
-    progrLangAnswer: Yup.array().of(Yup.string().required('Required'))
+  const validationSchema2 = Yup.object({
+   
   })
 
+  // Proceed to next step
   const onSubmit = (formValues, final) => {
 
-    //TODO: bale to periexomeno tis next step edw. Kai sto Job DEsc
-
-    console.log('Form data', formValues)
-
-    nextStep(formValues, final)
-
-  }
-
-  // Proceed to next step
-  function nextStep(newData, final = false) {
-
-    setInitialValues((prev) => ({ ...prev, ...newData }))
+    setInitialValues((prev) => ({ ...prev, ...formValues }))
 
     if (final) {
-      console.log("Form submitted", newData)
-      //TODO: fix this
-      var processName = "Screening"
-      navigate("/" + processName +"Final", { state: [newData,serverUserInfo,processName,loginUserInfo] });
+      console.log("Form submitted", formValues)
+      console.log(ratingsMap)
+      navigate("/" + processName + "Final", { state: [ratingsMap, serverUserInfo, processName] });
     }
     else {
       setStep(step => step + 1)
@@ -86,10 +83,9 @@ function Screening() {
 
   }
 
-
   const pages = [
-    <Screening1 initialValues={initialValues} validationSchema={validationSchema1} onSubmit={onSubmit} postProof={postProof} />,
-    <Screening2 prevStep={prevStep} initialValues={initialValues} validationSchema={validationSchema2} onSubmit={onSubmit} postProof={postProof} />,
+    <Screening1 initialValues={initialValues} validationSchema={validationSchema1} onSubmit={onSubmit} postProof={postProof} handleRating={handleRating} />,
+    <Screening2 prevStep={prevStep} initialValues={initialValues} validationSchema={validationSchema2} onSubmit={onSubmit} postProof={postProof} handleRating={handleRating} />,
   ]
 
   return (

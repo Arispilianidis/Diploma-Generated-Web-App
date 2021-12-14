@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Formik, Form } from 'formik'
 import * as Yup from 'yup'
@@ -13,7 +13,6 @@ const workersURL = "http://localhost:3000/users"
 function Login() {
 
     const navigate = useNavigate();
-    const [post, setPost] = useState(null);
 
     const initialValues = {
         username: '',
@@ -29,51 +28,33 @@ function Login() {
 
         console.log('Form data', loginValues)
 
-        if (authorize(loginValues, post.data)) {
-            alert("Welcome " + loginValues.username)
-            setTimeout(function () {
-                navigate("/Processes", {state: [loginValues,post.data]});
-            }, 500);
-        }
-        else {
-            alert("You dont have access to this page")
-        }
-    }
-
-    
-    function authorize(loginValues, data) {
-
-        var result = false
-
-        //Search if the person trying to enter the page is registered in the model
-        data.forEach(myFunction)
-
-        return result
-
-        //test
-        function myFunction(person) {
-
-            if ((person.username.toLowerCase() === loginValues.username.toLowerCase()) && (person.password.toLowerCase() === loginValues.password.toLowerCase())) {
-                result = true
-                return result
-            }
-        }
-    }
-
-    //TODO: Do the authentication on server with POST
-    useEffect(() => {
         axios.get(workersURL, {
+            params: { loginValues },
             method: 'GET',
             headers: {
                 'Access-Control-Allow-Origin': '*',
                 'Content-Type': 'application/json',
             }
         })
-            .then(response => { setPost(response.data) })
-            .catch(error => console.log("Error at get users " + error.message))
-    }, [])
+            .then(response => {
 
-    
+                if (response.data.data !== undefined) {
+
+                    alert("Welcome " + loginValues.username)
+                    setTimeout(function () {
+                        navigate("/Processes", { state: [response.data.data] });
+                    }, 500);
+                }
+                else {
+                    alert("You dont have access to this page")
+                }
+
+            })
+            .catch(error => console.log("Error at get users " + error.message))
+
+
+    }
+
     return (
         <div className="flexBoxes">
 

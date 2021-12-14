@@ -9,15 +9,16 @@ var dataArray = require('./UsersData.json');
 /* GET users listing. */
 router.get('/', function (req, res, next) {
 
+  let param = JSON.parse(req.query.loginValues)
+  const serverUserInfo = dataArray.find( person => ((person.username.toLowerCase() === param.username.toLowerCase()) && (person.password.toLowerCase() === param.password.toLowerCase())) );
+
   res.json({
-    data: dataArray
+    data: serverUserInfo
   })
 });
 
 router.put('/', function (req, res, next) {
 
-
-  // console.log(req.body)
   let newData = req.body.data
 
   //Find index of specific object using findIndex method.    
@@ -42,23 +43,23 @@ router.put('/', function (req, res, next) {
   });
 
   res.json({
-    data: dataArray
+    data: dataArray[objIndex]
   })
 
 });
 
-router.post('/', function (req, res, next) {
+//Not needed post yet.
+// router.post('/', function (req, res, next) {
 
-  //not needed to post users yet.
-  // console.log(req.body)
-  dataArray.push(req.body)
+//   
+//   // console.log(req.body)
+//   dataArray.push(req.body)
 
-  res.json({
-    data: dataArray
-  })
+//   res.json({
+//     data: dataArray
+//   })
 
-
-});
+// });
 
 
 module.exports = router;

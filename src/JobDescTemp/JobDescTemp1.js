@@ -27,7 +27,7 @@ function JobDescTemp1(props) {
             <FormikControl control='input' type='text' label='Business name ' name='businessName' placeholder="Name" />
 
             
-            <input style={{ marginLeft: 30 }} name='businessNameProof' type='file' id='businessNameProof'  onChange={(event) => {
+            <input style={{ marginLeft: 20 }} name='businessNameProof' type='file' id='businessNameProof'  onChange={(event) => {
               formik.setFieldValue("businessNameProof",event.currentTarget.files[0])
               props.postProof("businessNameProof")
             }} />
