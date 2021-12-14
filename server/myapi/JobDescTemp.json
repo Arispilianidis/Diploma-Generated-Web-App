@@ -1,23 +1,24 @@
 {
-  "businessName": "a",
-  "title": "a",
-  "location": "a",
-  "description": "a",
+  "businessName": "kenotom",
+  "title": "asd",
+  "location": "asd",
+  "description": "asd",
   "responsibilities": [
+    "Company-wide committee facilitation and participation",
     "Employee orientation and training logistics and recordkeeping"
   ],
   "progLangResponsibilities": [
-    "CSS"
+    "CSS",
+    "JavaScript",
+    "C/C++",
+    "React"
   ],
   "qualifications": [],
   "jobLengthRadioOption": "",
   "skillsAquired": [],
   "postDate": null,
   "closePostDate": null,
-  "salary": 123,
+  "salary": 0,
   "checkboxOption": [],
-  "proofs": [
-    "",
-    ""
-  ]
+  "businessNameProof": ""
 }
