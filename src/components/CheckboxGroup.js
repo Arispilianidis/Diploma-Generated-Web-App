@@ -41,7 +41,7 @@ function CheckboxGroup(props) {
 
     return (
         <div>
-            <label style={{ display: 'block', textAlign: 'center' }}>{label}</label>
+            <label style={{textAlign: 'center' }}><b>{label}</b></label>
             <div id={props.id} className="CheckboxContainer">
 
                 <input type="text" id={props.name} onKeyUp={SearchBox} placeholder="Search.." />

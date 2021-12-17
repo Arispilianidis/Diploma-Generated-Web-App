@@ -4,35 +4,34 @@ import { useNavigate } from 'react-router-dom';
 import { useLocation } from 'react-router';
 import axios from 'axios'
 import '../css/JobDescTemp.css';
-import JobDescTemp1 from './JobDescTemp1';
-import JobDescTemp2 from './JobDescTemp2';
-import JobDescTemp3 from './JobDescTemp3';
+
+
+import JobDescTemp1 from './JobDescTemp1'
+
+import JobDescTemp2 from './JobDescTemp2'
+
+import JobDescTemp3 from './JobDescTemp3'
 
 
 function JobDescTemp() {
 
   let { state } = useLocation();
-  let serverUserInfo = state[0]
-  let processName = state[1]
+  let serverUserInfo = state[0] 
+  let processName = state[1] 
 
   const navigate = useNavigate();
-  const [step, setStep] = useState(0);
+  const [step, setStep]= useState(0);
   const [initialValues, setInitialValues] = useState({
-    businessName: "",
-    title: "",
-    location: "",
-    description: "",
-    responsibilities: [],
-    progLangResponsibilities: [],
-    qualifications: [],
-    jobLengthRadioOption: "",
-    skillsAquired: [],
-    postDate: null,
-    closePostDate: null,
-    salary: 0,
-    checkboxOption: [],
-    businessNameProof: "",
+ 	bussinessName: "",
+ 	bussinessNameProof: "",
+ 	radio1: "",
+ 	drop1: "",
+ 	drop1Proof: "",
+ 	input2: 0,
+ 	textarea1: "",
+ 	check1: [],
   })
+
 
   function postProof(imagefileName) {
 
@@ -48,24 +47,23 @@ function JobDescTemp() {
         'Content-Type':'multipart/form-data',
       }
     })
-      .catch(error => console.log("Error at postProof => " + error.message))
+    .catch(error => console.log("Error at postProof => " + error.message))
 
   }
 
   const validationSchema1 = Yup.object({
-    businessName: Yup.string().required('Required'),
+    bussinessName: Yup.string().required('Required'),
+    radio1: Yup.string().required('Required'),
+    drop1: Yup.string().required('Required'),
   })
 
   const validationSchema2 = Yup.object({
-    location: Yup.string().required('Required'),
-    salary: Yup.number().required('Required').min(0).max(1000000),
-    description: Yup.string().required('Required'),
+    input2: Yup.number().required('Required').min(0).max(1000),
+    textarea1: Yup.string().required('Required'),
   })
 
   const validationSchema3 = Yup.object({
-    title: Yup.string().required('Required'),
-    responsibilities: Yup.array().required('Required').min(1, 'Required'),
-    progLangResponsibilities: Yup.array().required('Required').min(1, 'Required'),
+    check1: Yup.array().required('Required').min(1, 'Required'),
   })
 
 
@@ -76,41 +74,33 @@ function JobDescTemp() {
 
     if (final) {
       console.log("Form submitted", formValues)
-      navigate("/" + processName + "Final", { state: [formValues, serverUserInfo, processName] });
+
+      navigate("/JobDescTempFinal", {state: [formValues,serverUserInfo,processName]});
     }
-    else {
+    else{
       setStep(step => step + 1)
     }
 
   }
 
   // Proceed to prev step
-  function prevStep(newData) {
-
+  function prevStep() {
     setStep(step => step - 1)
-
   }
 
-
   const pages = [
-    <JobDescTemp1 initialValues={initialValues} validationSchema={validationSchema1} onSubmit={onSubmit} postProof={postProof} />,
-    <JobDescTemp2 prevStep={prevStep} initialValues={initialValues} validationSchema={validationSchema2} onSubmit={onSubmit} postProof={postProof} />,
-    <JobDescTemp3 prevStep={prevStep} initialValues={initialValues} validationSchema={validationSchema3} onSubmit={onSubmit} postProof={postProof} />
-  ]
 
+		<JobDescTemp1 initialValues={initialValues} validationSchema={validationSchema1} onSubmit={onSubmit} postProof={postProof} />,
+		<JobDescTemp2 prevStep={prevStep} initialValues={initialValues} validationSchema={validationSchema2} onSubmit={onSubmit} postProof={postProof} />,
+		<JobDescTemp3 prevStep={prevStep} initialValues={initialValues} validationSchema={validationSchema3} onSubmit={onSubmit} postProof={postProof} />,
+	]
 
   return (
-
     <div>
-      {pages[step]}
-
+      { pages[step] }
     </div>
-
-
   );
 
 }
-
-
 
 export default JobDescTemp;

@@ -1,6 +1,8 @@
 import React from 'react'
 import FormikControl from '../components/FormikControl'
 import { Formik, Form } from 'formik'
+import Proof from '../components/Proof'
+
 
 function JobDescTemp2(props) {
 
@@ -9,27 +11,29 @@ function JobDescTemp2(props) {
   }
 
 
+
+
   const { prevStep } = props
 
-  return (
+ return (
 
     <Formik initialValues={props.initialValues} validationSchema={props.validationSchema} onSubmit={handleSumbit} >
       {
 
         formik => <Form id="regForm">
-          <h1> Job Desc Template </h1>
+          <h1> JobDescTemp Overview </h1>
           <span>
-            <h3>Gather job information</h3>
-            <p>You will need to find out the information regarding the job role.
-               You will have to speak to the manager of the hiring department (IT, sales, customer support)
-               and gather the information you need to post the job. </p>
 
-            <FormikControl control='input' type='text' label='Job Location' name='location' placeholder="Location" />
-            <FormikControl control='input' type='number' label='Salary' name='salary' placeholder="Salary" />
-            <FormikControl control='textarea' label='Summary Of The Job' name='description' placeholder="Summary" />
+            <h3> Gather job information</h3>
 
+            <p> You will need to find out the information regarding the job role.</p>
+
+						<FormikControl control='input' type='number' label='Salary' name='input2' placeholder="" />
+
+						<FormikControl control ='textarea' label='Summary Of The Job' name='textarea1' placeholder="Enter text here..." />
+			
             <button type="submit"> Next</button>
-            <button type="button" className="PrevBtn" onClick={prevStep}> Back</button>
+						<button type="button" className="PrevBtn" onClick={prevStep}> Back</button>
 
           </span>
 
@@ -41,3 +45,4 @@ function JobDescTemp2(props) {
 }
 
 export default JobDescTemp2
+

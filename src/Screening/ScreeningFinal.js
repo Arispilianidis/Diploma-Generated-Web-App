@@ -7,17 +7,16 @@ const workersURL = "http://localhost:3000/users"
 
 function ScreeningFinal() {
 
-
     const navigate = useNavigate();
     let { state } = useLocation();
     const ratingsMap = state[0]
     const serverUserInfo = state[1]
     const processName = state[2]
 
-    //Update user's info since he completed the process
+ 	//Update user's info since he completed the process
     function completeTask(candidateSucceeded) {
-        let  link
 
+		let  link
         if (candidateSucceeded) {
 
             link = "mailto:candidate@example.com"
@@ -72,7 +71,7 @@ function ScreeningFinal() {
 
             <div style={{ backgroundColor: 'white', wordWrap: 'break-word' }}>
 
-                This candidate's overall score is : {averageRating()} / 5
+                This candidate's overall score is : {averageRating()} / 5 
 
             </div>
 
@@ -84,4 +83,3 @@ function ScreeningFinal() {
 }
 
 export default ScreeningFinal
-

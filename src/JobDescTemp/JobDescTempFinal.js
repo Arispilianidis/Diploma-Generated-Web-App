@@ -14,10 +14,6 @@ function JobDescTempFinal() {
     const serverUserInfo = state[1]
     const processName = state[2]
 
-    console.log(formData)
-    console.log(serverUserInfo)
-    console.log(processName)
-
     function isValidDate(date) {
         return date && Object.prototype.toString.call(date) === "[object Date]" && !isNaN(date);
     }
@@ -52,6 +48,7 @@ function JobDescTempFinal() {
         //remove process from the server
         serverUserInfo.assignedProcesses.splice(processIndex, 1)
         serverUserInfo.dueDate.splice(processIndex, 1)
+        // console.log(serverUserInfo)
 
         axios.post("http://localhost:3000/" + processName, formData, {
             headers: {
@@ -71,14 +68,12 @@ function JobDescTempFinal() {
             data: serverUserInfo
         })
             .then(response => {
-                // console.log(response.data.data)
+                // console.log(response.data)
                 navigate("/Processes", { state: [response.data.data] })
             })
             .catch(error => console.log("Error at completeTask " + error.message))
 
     }
-
-
 
     return (
         <div style={{ width: "50%", margin: "auto", maxWidth: 650, minWidth: 500 }}>
@@ -86,14 +81,14 @@ function JobDescTempFinal() {
             <hr></hr><br />
 
             <div style={{ backgroundColor: 'white', wordWrap: 'break-word' }}>
-                <h4> businessName:</h4> <div>{printItem(formData.businessName)}</div>  <br />
+              
+ 			<h4> Business name:</h4> <div>{printItem(formData.bussinessName)}</div>  <br />
+ 			<h4> Which language do you prefer?:</h4> <div>{printItem(formData.radio1)}</div>  <br />
+ 			<h4> Choose favorite color::</h4> <div>{printItem(formData.drop1)}</div>  <br />
+ 			<h4> Salary:</h4> <div>{printItem(formData.input2)}</div>  <br />
+ 			<h4> Summary Of The Job:</h4> <div>{printItem(formData.textarea1)}</div>  <br />
+ 			<h4> Jot down language responsibilities:</h4> <div>{printItem(formData.check1)}</div>  <br />
 
-                <h4> title: </h4> <div>{printItem(formData.title)} </div><br />
-
-                <h4> responsibilities: </h4><div> {printItem(formData.responsibilities)}</div><br />
-
-                <h4>progLangResponsibilities:</h4><div> {printItem(formData.progLangResponsibilities)}</div><br />
-                
             </div>
 
             <button className="btn_complete" onClick={completeTask}>Complete Task</button>
@@ -103,4 +98,6 @@ function JobDescTempFinal() {
     )
 }
 
+
 export default JobDescTempFinal
+
