@@ -10,13 +10,14 @@ function JobDescTemp3(props) {
     props.onSubmit(values, true)
   }
 
-const checkOptions1 = [
+  const checkOptions1 = [
+    {key: 'HTML', value: 'HTML'},
     {key: 'CSS', value: 'CSS'},
     {key: 'JavaScript', value: 'JavaScript'},
-    {key: 'React', value: 'React'},
     {key: 'C/C++', value: 'C/C++'},
-    {key: 'HTML', value: 'HTML'},
+    {key: 'React', value: 'React'},
   ]
+
 
 
   const { prevStep } = props

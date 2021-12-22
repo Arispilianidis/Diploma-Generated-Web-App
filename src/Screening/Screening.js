@@ -9,11 +9,9 @@ import Screening1 from './Screening1'
 import Screening2 from './Screening2'
 
 const ratingsMap = new Map([
-  ["input3Rating", 0],
-  ["input4Rating", 0],
-  ["date1Rating", 0],
-  ["input5Rating", 0],
 ]);
+
+
 
 function Screening() {
 
@@ -30,13 +28,12 @@ function Screening() {
   const [step, setStep] = useState(0);
   const [initialValues, setInitialValues] = useState({
  	input3: "",
+ 	input6: "",
  	input4: "",
  	date1: null,
  	input5: "",
- 	check2: [],
- 	ProgrammingLanguageAnswer: ["", "", "", "", "", "", ""],
- 	EducationAnswer: [],
- 	SpokenLanguageAnswer: ["", "", "", "", ""],
+ 	check1Answer: ["", "", "", "", "", "", ""],
+ 	radio1Answer: ["", "", "", "", ""],
   })
 
   function postProof(imagefileName) {
@@ -58,13 +55,13 @@ function Screening() {
 
   const validationSchema1 = Yup.object({
     input3: Yup.string().required('Required'),
+    input6: Yup.string().required('Required'),
     input4: Yup.string().email('Invalid email').required('Required'),
     date1: Yup.date().required('Required').nullable(),
-    input5: Yup.string().required('Required'),
   })
 
   const validationSchema2 = Yup.object({
-    check2: Yup.array().required('Required').min(1, 'Required'),
+    
   })
 
 
@@ -76,7 +73,7 @@ function Screening() {
     if (final) {
       console.log("Form submitted", formValues)
       console.log(ratingsMap)
-      navigate("/" + processName + "Final", { state: [ratingsMap, serverUserInfo, processName] });
+      navigate("/" + processName + "Final", { state: [ratingsMap, serverUserInfo, processName, formValues] });
     }
     else {
       setStep(step => step + 1)

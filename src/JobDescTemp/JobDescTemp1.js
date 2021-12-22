@@ -10,18 +10,17 @@ function JobDescTemp1(props) {
     props.onSubmit(values, false)
   }
 
-const radioOption1 = [
+  const radioOption1 = [
     {key: 'English', value: 'English'},
     {key: 'German', value: 'German'},
-    {key: 'Armenina', value: 'Armenina'},
+    {key: 'Greek', value: 'Greek'},
   ]
-
   const dropOptions1 = [
     {key: 'red', value: 'red'},
     {key: 'green', value: 'green'},
     {key: 'blue', value: 'blue'},
-    {key: 'cyan', value: 'cyan'},
   ]
+
 
 
 

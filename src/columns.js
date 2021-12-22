@@ -1,10 +1,18 @@
 export const COLUMNS = [
     {
-        Header: "Process Name",
-        accessor: 'assignedProcesses'
+        Header: "First Name",
+        accessor: 'first_name'
     },
     {
-        Header: "Due Date",
-        accessor: 'dueDate'
+        Header: "Last Name",
+        accessor: 'last_name'
+    },
+    {
+        Header: "Email",
+        accessor: 'email'
+    },
+    {
+        Header: "Score",
+        accessor: 'Score'
     },
 ]

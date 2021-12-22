@@ -43,12 +43,6 @@ function JobDescTempFinal() {
     //Update user's info since he completed the process
     function completeTask() {
 
-        var processIndex = serverUserInfo.assignedProcesses.indexOf(processName);
-
-        //remove process from the server
-        serverUserInfo.assignedProcesses.splice(processIndex, 1)
-        serverUserInfo.dueDate.splice(processIndex, 1)
-        // console.log(serverUserInfo)
 
         axios.post("http://localhost:3000/" + processName, formData, {
             headers: {
@@ -56,22 +50,11 @@ function JobDescTempFinal() {
                 'Content-Type': 'application/json',
             }
         })
-            .then(response => console.log(response))
-            .catch(error => console.log("Error at complete Task => " + error.message))
-
-
-        axios.put(workersURL, {
-            headers: {
-                'Access-Control-Allow-Origin': '*',
-                'Content-Type': 'application/json',
-            },
-            data: serverUserInfo
-        })
             .then(response => {
-                // console.log(response.data)
-                navigate("/Processes", { state: [response.data.data] })
+                console.log(response)
+                navigate("/Processes", { state: [serverUserInfo] });
             })
-            .catch(error => console.log("Error at completeTask " + error.message))
+            .catch(error => console.log("Error at complete Task => " + error.message))
 
     }
 

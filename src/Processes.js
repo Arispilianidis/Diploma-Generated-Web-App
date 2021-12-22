@@ -1,87 +1,101 @@
-import React, { useMemo } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useLocation } from 'react-router';
 import { useNavigate } from 'react-router-dom';
-import { useTable } from 'react-table'
-import { COLUMNS } from "./columns"
+import Candidates from './Candidates';
 import CurrentDate from './components/CurrentDate';
+import axios from 'axios'
 import './css/Tables.css'
 
+const candidatesURL = "http://localhost:3000/JobDescTempCandidates"
 
 function Processes() {
 
     const { state } = useLocation();
     const serverUserInfo = state[0]
     console.log(serverUserInfo)
-    
     const navigate = useNavigate();
-    const columns = useMemo(() => COLUMNS, [])
 
-    //Transform the data to the correct format
-    let serverUserInfoObjectArray = []
+    const [candidates, setCandidates] = useState(null)
+    const [error, setError] = useState(null);
 
-    for (let x in serverUserInfo.assignedProcesses) {
-        let serverUserInfoObject = {}
-        serverUserInfoObject.assignedProcesses = serverUserInfo.assignedProcesses[x]
-        serverUserInfoObject.dueDate = new Date((serverUserInfo.dueDate[x]).split('EET')).toLocaleString()
-        serverUserInfoObjectArray.push(serverUserInfoObject)
+    const [showCandidates, setShowCandidates] = useState(false)
+
+    //TODO: This will be onClick sta dropdown items,Get data with axios, check if no Candidates yet
+    useEffect(() => {
+     
+        axios.get(candidatesURL, {
+            method: 'GET',
+            headers: {
+                'Access-Control-Allow-Origin': '*',
+                'Content-Type': 'application/json',
+            }
+        })
+            .then(response => {
+                console.log(response.data.data)
+                setCandidates(response.data.data)
+            })
+            .catch(setError)
+    }, [showCandidates])
+
+
+    if (error) {
+        return <pre> {JSON.stringify(error.message, null, 2)}</pre>
     }
-
-    const {
-        getTableProps,
-        getTableBodyProps,
-        headerGroups,
-        rows,
-        prepareRow,
-    } = useTable({
-        columns,
-        data: serverUserInfoObjectArray
-    })
 
     function goto(event) {
 
         var processName = event.target.textContent
+        navigate("/" + processName, { state: [serverUserInfo, processName] })
 
-        if (processName.includes(":") || processName.includes("/")) {
-            //the user clicked the dueDate and not the process
-            alert("Please click the Process's name instead of the date")
-        }
-        else {
-            navigate("/" + processName, { state: [serverUserInfo, processName] })
-        }
+    }
+
+    function createProcessDropdownMenu() {
+
+        return serverUserInfo.assignedProcesses.map((element) => {
+            return <li key={element} onClick={goto} style={{ cursor: 'pointer' }}>{element}</li>
+        });
+
+    }
+
+    function createCandidatesDropdownMenu() {
+
+        return serverUserInfo.assignedProcesses.map((element) => {
+            return <li key={element} style={{ cursor: 'pointer' }}>{element}</li>
+        });
+
+    }
+
+    function handleShow() {
+        setShowCandidates((prevShow) => {
+            return !prevShow
+        })
     }
 
     return (
 
-
-        <div className="TableContainer">
+        <div className='TableContainer'>
             <CurrentDate />
-            <table {...getTableProps()}>
-                <thead>
-                    {headerGroups.map((headerGroup) => (
+            <div className="dropdown">
+                <button style={{ marginTop: '40px' }} className="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"> Create Process
+                    <span className="caret"></span></button>
 
-                        <tr {...headerGroup.getHeaderGroupProps()}>
-                            {headerGroup.headers.map((column) => (
-                                <th {...column.getHeaderProps()}><b>{column.render('Header')}</b></th>
-                            ))}
-                        </tr>
-                    ))}
-                </thead>
-                <tbody {...getTableBodyProps()}>
-                    {rows.map((row) => {
-                        prepareRow(row)
-                        return (
-                            <tr {...row.getRowProps()}>
-                                {row.cells.map((cell) => {
-                                    return <td {...cell.getCellProps()}><button onClick={goto}>{cell.render('Cell')}</button></td>
-                                })}
-                            </tr>
-                        )
-                    })}
-                </tbody>
-            </table>
+                <ul className="dropdown-menu">
+                    {createProcessDropdownMenu()}
+                </ul>
+            </div>
+
+            <div className="dropdown">
+                <button onClick={handleShow} style={{ marginTop: '40px' }} className="btn btn-info btn-primary dropdown-toggle" type="button" data-toggle="dropdown"> Show Screened Candidates
+                    <span className="caret"></span></button>
+
+                <ul className="dropdown-menu">
+                    {createCandidatesDropdownMenu()}
+                </ul>
+            </div>
+
+            {showCandidates ? <Candidates candidates={candidates} /> : " "}
+
         </div>
-
-
     )
 }
 
