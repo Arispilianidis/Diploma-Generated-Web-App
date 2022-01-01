@@ -12,6 +12,7 @@ var usersRouter = require('./routes/users');
 var uploadsRouter = require('./routes/uploadeFiles');
 var JobDescTempRouter = require('./routes/JobDescTemp');
 var candidatesRouter = require('./routes/JobDescTempCandidates');
+var optionsRatingRouter = require('./routes/JobDescTempOptionsRating');
 
 
 var app = express();
@@ -34,6 +35,7 @@ app.use('/users', usersRouter);
 app.use('/uploadeFiles', uploadsRouter);
 app.use('/JobDescTemp', JobDescTempRouter);
 app.use('/JobDescTempCandidates', candidatesRouter);
+app.use('/JobDescTempOptionsRating', optionsRatingRouter);
 
 
 // catch 404 and forward to error handler

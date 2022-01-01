@@ -15,8 +15,8 @@ function Radiobuttons(props) {
                                 return (
                                     <React.Fragment key={option.key}>
                                         <div style={{ justifyContent: 'flex-start' }} className="flexBoxes">
-                                            <input type='radio' style={{ marginTop: 28 }} id={option.value} {...field} value={option.value} checked={field.value === option.value} />
-                                            <label htmlFor={option.value}>{option.key}</label>
+                                            <input type='radio' style={{ marginTop: 25, marginLeft:20 }} id={option.value} {...field} value={option.value} checked={field.value === option.value} />
+                                            <label className='radiolabels' htmlFor={option.value}>{option.key}</label>
                                         </div>
                                     </React.Fragment>
                                 )

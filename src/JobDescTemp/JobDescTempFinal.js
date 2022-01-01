@@ -44,7 +44,7 @@ function JobDescTempFinal() {
     function completeTask() {
 
 
-        axios.post("http://localhost:3000/" + processName, formData, {
+        axios.post("http://localhost:3000/" + processName, {formData,processName}, {
             headers: {
                 'Access-Control-Allow-Origin': '*',
                 'Content-Type': 'application/json',

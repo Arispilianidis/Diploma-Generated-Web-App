@@ -48,7 +48,7 @@ function JobDescTemp1(props) {
 						<FormikControl control ='radio' label='Which language do you prefer?' name='radio1' options={radioOption1}/>
 
 						<FormikControl control ='select' label='Choose favorite color:' name='drop1' options={dropOptions1} />
-						<input style={{ marginLeft: 20 }} name='drop1Proof' type='file' id='drop1Proof'  onChange={(event) => {
+						<input style={{ marginLeft: 20, marginTop:10 }} name='drop1Proof' type='file' id='drop1Proof'  onChange={(event) => {
 						  formik.setFieldValue("drop1Proof",event.currentTarget.files[0])
 						  props.postProof("drop1Proof")
 						}} />

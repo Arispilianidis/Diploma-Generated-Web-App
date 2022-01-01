@@ -11,46 +11,50 @@ function ScreeningFinal() {
     let { state } = useLocation();
     const ratingsMap = state[0]
     const serverUserInfo = state[1]
-    const processName = state[2]
+    const formValues = state[2]
 
- 	//Update user's info since he completed the process
-    function completeTask(candidateSucceeded) {
+    //Update user's info since he completed the process
+    function completeTask() {
 
-		let  link
-        if (candidateSucceeded) {
+        // let  link
+        // if (candidateSucceeded) {
 
-            link = "mailto:candidate@example.com"
-                + "?cc="
-                + "&subject=" + encodeURIComponent("Congratulations")
-                + "&body=" + encodeURIComponent("We would like to inform you that you have successfully passed the stage of the selection process.\n")
-        } else {
+        //     link = "mailto:candidate@example.com"
+        //         + "?cc="
+        //         + "&subject=" + encodeURIComponent("Congratulations")
+        //         + "&body=" + encodeURIComponent("We would like to inform you that you have successfully passed the stage of the selection process.\n")
+        // } else {
 
-            link = "mailto:candidate@example.com"
-                + "?cc="
-                + "&subject=" + encodeURIComponent("Thank you for applying")
-                + "&body=" + encodeURIComponent("We would like to inform you that you you did not pass the stage of the selection process.\n")
+        //     link = "mailto:candidate@example.com"
+        //         + "?cc="
+        //         + "&subject=" + encodeURIComponent("Thank you for applying")
+        //         + "&body=" + encodeURIComponent("We would like to inform you that you you did not pass the stage of the selection process.\n")
+        // }
+        // window.location.href = link;
+        let processName = "JobDescTemp"
+        const {
+            input3,
+            input6
+        } = formValues
+
+        const candidateInfo = {
+            input3,
+            input6
         }
-        window.location.href = link;
 
-        var processIndex = serverUserInfo.assignedProcesses.indexOf(processName);
+        console.log(candidateInfo);
 
-        //remove process from the server
-        serverUserInfo.assignedProcesses.splice(processIndex, 1)
-        serverUserInfo.dueDate.splice(processIndex, 1)
-        // console.log(serverUserInfo)
-
-        axios.put(workersURL, {
+        axios.post("http://localhost:3000/JobDescTempCandidates", { candidateInfo, processName }, {
             headers: {
                 'Access-Control-Allow-Origin': '*',
                 'Content-Type': 'application/json',
-            },
-            data: serverUserInfo
+            }
         })
-            .then(response => {
-                // console.log(response.data)
-                navigate("/Processes", { state: [response.data.data] })
+            .catch(error => {
+                console.log("Error at post Candidates => " + error.message)
             })
-            .catch(error => console.log("Error at completeTask " + error.message))
+
+        navigate("/Processes", { state: [serverUserInfo] });
     }
 
     function averageRating() {
@@ -71,12 +75,11 @@ function ScreeningFinal() {
 
             <div style={{ backgroundColor: 'white', wordWrap: 'break-word' }}>
 
-                This candidate's overall score is : {averageRating()} / 5 
+                This candidate's overall score is : {averageRating()} / 5
 
             </div>
 
-            <button className="btn_complete" onClick={() => { completeTask(true) }}>Accept</button>
-            <button className="btn_reject" onClick={() => { completeTask(false) }}>Reject</button>
+            <button className="btn_complete" onClick={() => { completeTask() }}>Accept</button>
         </div>
 
     )

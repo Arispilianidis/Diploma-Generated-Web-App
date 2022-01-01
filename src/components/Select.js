@@ -10,7 +10,7 @@ function Select(props) {
             <label htmlFor={name}><b>{label}</b></label>
             <div>
 
-                <Field as='select' id={name} name={name} {...rest}>
+                <Field as='select' id={name} name={name} style={{marginTop:10, marginLeft:20, marginBottom:10 }} {...rest}>
                     {
                         options.map(option => {
                             return (

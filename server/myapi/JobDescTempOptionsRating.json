@@ -1,0 +1,196 @@
+[
+	{
+		"name": "radio1",
+		"options": [
+			{
+				"optionValue": "English",
+				"optionRating": [
+					{
+						"ID": 0,
+						"isAbout": 1,
+						"iconsCount": 4,
+						"tooltipArray": [
+							"A1-B1",
+							"Lower",
+							"Advanced",
+							"Proficency"
+						]
+					}
+				]
+			},
+			{
+				"optionValue": "German",
+				"optionRating": [
+					{
+						"ID": 1,
+						"isAbout": 1,
+						"iconsCount": 3,
+						"tooltipArray": [
+							"A1-B1",
+							"B1-B2",
+							"B2-C1"
+						]
+					}
+				]
+			},
+			{
+				"optionValue": "Greek",
+				"optionRating": [
+					{
+						"ID": 12,
+						"isAbout": 1,
+						"iconsCount": 2,
+						"tooltipArray": [
+							"junior",
+							"highscool"
+						]
+					}
+				]
+			}
+		]
+	},
+	{
+		"name": "drop1",
+		"options": [
+			{
+				"optionValue": "red",
+				"optionRating": []
+			},
+			{
+				"optionValue": "green",
+				"optionRating": []
+			},
+			{
+				"optionValue": "blue",
+				"optionRating": []
+			}
+		]
+	},
+	{
+		"name": "check1",
+		"options": [
+			{
+				"optionValue": "HTML",
+				"optionRating": [
+					{
+						"ID": 2,
+						"isAbout": 0,
+						"iconsCount": 2,
+						"tooltipArray": [
+							"bad",
+							"good"
+						]
+					},
+					{
+						"ID": 3,
+						"isAbout": 2,
+						"iconsCount": 5,
+						"tooltipArray": [
+							"1",
+							"2",
+							"3",
+							"4",
+							"5"
+						]
+					}
+				]
+			},
+			{
+				"optionValue": "CSS",
+				"optionRating": [
+					{
+						"ID": 4,
+						"isAbout": 0,
+						"iconsCount": 3,
+						"tooltipArray": [
+							"terrible",
+							"avg",
+							"good"
+						]
+					},
+					{
+						"ID": 5,
+						"isAbout": 2,
+						"iconsCount": 2,
+						"tooltipArray": [
+							"1",
+							"2"
+						]
+					}
+				]
+			},
+			{
+				"optionValue": "JavaScript",
+				"optionRating": [
+					{
+						"ID": 6,
+						"isAbout": 0,
+						"iconsCount": 3,
+						"tooltipArray": [
+							"Callbacks",
+							"Promises",
+							"Async"
+						]
+					},
+					{
+						"ID": 7,
+						"isAbout": 2,
+						"iconsCount": 2,
+						"tooltipArray": [
+							"1",
+							"2"
+						]
+					}
+				]
+			},
+			{
+				"optionValue": "C/C++",
+				"optionRating": [
+					{
+						"ID": 8,
+						"isAbout": 0,
+						"iconsCount": 5,
+						"tooltipArray": [
+							"Runtime Polymorphism",
+							"Inheritance"
+						]
+					},
+					{
+						"ID": 9,
+						"isAbout": 2,
+						"iconsCount": 3,
+						"tooltipArray": [
+							"1",
+							"2",
+							"3"
+						]
+					}
+				]
+			},
+			{
+				"optionValue": "React",
+				"optionRating": [
+					{
+						"ID": 10,
+						"isAbout": 0,
+						"iconsCount": 2,
+						"tooltipArray": [
+							"low",
+							"high"
+						]
+					},
+					{
+						"ID": 11,
+						"isAbout": 2,
+						"iconsCount": 3,
+						"tooltipArray": [
+							"1",
+							"2",
+							"3"
+						]
+					}
+				]
+			}
+		]
+	}
+]

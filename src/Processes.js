@@ -6,7 +6,6 @@ import CurrentDate from './components/CurrentDate';
 import axios from 'axios'
 import './css/Tables.css'
 
-const candidatesURL = "http://localhost:3000/JobDescTempCandidates"
 
 function Processes() {
 
@@ -20,10 +19,28 @@ function Processes() {
 
     const [showCandidates, setShowCandidates] = useState(false)
 
-    //TODO: This will be onClick sta dropdown items,Get data with axios, check if no Candidates yet
-    useEffect(() => {
-     
-        axios.get(candidatesURL, {
+    function goto(event) {
+
+        let processName = event.target.textContent
+        navigate("/" + processName, { state: [serverUserInfo, processName] })
+    }
+
+    function createProcessDropdownMenu() {
+
+        //TODO: Egw logika apo M2t pairnw ta Processes
+        return serverUserInfo.assignedProcesses.map((element) => {
+            return <li key={element} onClick={goto} style={{ cursor: 'pointer', marginLeft: 10, marginBottom: 10 }}>{element}</li>
+        });
+
+    }
+
+    function getCandidates(event) {
+
+        let JobDescTempOfScrenningProcess = event.target.textContent
+        console.log(JobDescTempOfScrenningProcess)
+
+        axios.get("http://localhost:3000/JobDescTempCandidates", {
+            params: { JobDescTempOfScrenningProcess: JobDescTempOfScrenningProcess },
             method: 'GET',
             headers: {
                 'Access-Control-Allow-Origin': '*',
@@ -34,41 +51,36 @@ function Processes() {
                 console.log(response.data.data)
                 setCandidates(response.data.data)
             })
-            .catch(setError)
-    }, [showCandidates])
-
-
-    if (error) {
-        return <pre> {JSON.stringify(error.message, null, 2)}</pre>
-    }
-
-    function goto(event) {
-
-        var processName = event.target.textContent
-        navigate("/" + processName, { state: [serverUserInfo, processName] })
-
-    }
-
-    function createProcessDropdownMenu() {
-
-        return serverUserInfo.assignedProcesses.map((element) => {
-            return <li key={element} onClick={goto} style={{ cursor: 'pointer' }}>{element}</li>
-        });
+            .then(() => {
+                setShowCandidates(true)
+            })
+            .catch(error => {
+                console.log("Error at get Candidates => " + error.message)
+                setError(error)
+            })
 
     }
 
     function createCandidatesDropdownMenu() {
 
-        return serverUserInfo.assignedProcesses.map((element) => {
-            return <li key={element} style={{ cursor: 'pointer' }}>{element}</li>
+        let JobDescTempOfScrenningProcesses = [
+            "JobDescTemp",
+            "JobDescTemp1"
+        ]
+
+        return JobDescTempOfScrenningProcesses.map((element) => {
+            return <li onClick={getCandidates} key={element} style={{ cursor: 'pointer', marginLeft: 10, marginBottom: 10 }}>{element}</li>
         });
 
     }
 
     function handleShow() {
-        setShowCandidates((prevShow) => {
-            return !prevShow
-        })
+        setShowCandidates(false)
+    }
+
+
+    if (error) {
+        return <pre> {JSON.stringify(error.message, null, 2)}</pre>
     }
 
     return (
@@ -83,7 +95,7 @@ function Processes() {
                     {createProcessDropdownMenu()}
                 </ul>
             </div>
-
+            {/* //TODO: Handle show 8a einai se allo buton oxi panw sto dropdown */}
             <div className="dropdown">
                 <button onClick={handleShow} style={{ marginTop: '40px' }} className="btn btn-info btn-primary dropdown-toggle" type="button" data-toggle="dropdown"> Show Screened Candidates
                     <span className="caret"></span></button>

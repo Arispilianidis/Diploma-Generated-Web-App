@@ -9,6 +9,7 @@ import Screening1 from './Screening1'
 import Screening2 from './Screening2'
 
 const ratingsMap = new Map([
+  ["input3Rating", 0],
 ]);
 
 
@@ -22,6 +23,7 @@ function Screening() {
   // Catch Rating value
   const handleRating = (rate, name) => {
     ratingsMap.set(name, rate)
+	console.log(ratingsMap)
   }
 
   const navigate = useNavigate();
@@ -32,8 +34,9 @@ function Screening() {
  	input4: "",
  	date1: null,
  	input5: "",
- 	check1Answer: ["", "", "", "", "", "", ""],
- 	radio1Answer: ["", "", "", "", ""],
+ 	check1Answer0: ["", "", "", "", "", ""],
+ 	radio1Answer1: ["", "", "", ""],
+ 	check1Answer2: ["", "", "", "", "", ""],
   })
 
   function postProof(imagefileName) {
@@ -73,7 +76,7 @@ function Screening() {
     if (final) {
       console.log("Form submitted", formValues)
       console.log(ratingsMap)
-      navigate("/" + processName + "Final", { state: [ratingsMap, serverUserInfo, processName, formValues] });
+      navigate("/" + processName + "Final", { state: [ratingsMap, serverUserInfo, formValues] });
     }
     else {
       setStep(step => step + 1)
