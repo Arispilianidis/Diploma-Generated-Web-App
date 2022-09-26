@@ -37,23 +37,23 @@ function JobDescTemp1(props) {
 
             <p> First things first record the details of your business that is hiring. Do this by using the form fields below.</p>
 
-						<FormikControl control='input' type='text' label='Business name' name='bussinessName' placeholder="Name" />
-						<input style={{ marginLeft: 20 }} name='bussinessNameProof' type='file' id='bussinessNameProof'  onChange={(event) => {
-						  formik.setFieldValue("bussinessNameProof",event.currentTarget.files[0])
-						  props.postProof("bussinessNameProof")
-						}} />
-						
-						<Proof file={formik.values.bussinessNameProof} />
+		<FormikControl control='input' type='text' label='Business name' name='bussinessName' placeholder="Name" />
+		<input style={{ marginLeft: 20 }} name='bussinessNameProof' type='file' id='bussinessNameProof'  onChange={(event) => {
+		  formik.setFieldValue("bussinessNameProof",event.currentTarget.files[0])
+		  props.postProof("bussinessNameProof")
+		}} />
 
-						<FormikControl control ='radio' label='Which language do you prefer?' name='radio1' options={radioOption1}/>
+		<Proof file={formik.values.bussinessNameProof} />
 
-						<FormikControl control ='select' label='Choose favorite color:' name='drop1' options={dropOptions1} />
-						<input style={{ marginLeft: 20, marginTop:10 }} name='drop1Proof' type='file' id='drop1Proof'  onChange={(event) => {
-						  formik.setFieldValue("drop1Proof",event.currentTarget.files[0])
-						  props.postProof("drop1Proof")
-						}} />
-						
-						<Proof file={formik.values.drop1Proof} />
+		<FormikControl control ='radio' label='Which language do you prefer?' name='radio1' options={radioOption1}/>
+
+		<FormikControl control ='select' label='Choose favorite color:' name='drop1' options={dropOptions1} />
+		<input style={{ marginLeft: 20, marginTop:10 }} name='drop1Proof' type='file' id='drop1Proof'  onChange={(event) => {
+		  formik.setFieldValue("drop1Proof",event.currentTarget.files[0])
+		  props.postProof("drop1Proof")
+		}} />
+
+		<Proof file={formik.values.drop1Proof} />
 			
             <button type="submit"> Next</button>
 
